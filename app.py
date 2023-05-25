@@ -161,7 +161,7 @@ class Youtube:
         playlist_data['playlistId']=data['id']
         self.playlists[playlist_data['playlistName']]=playlist_data
   def save_to_mongo(self):
-      client = pymongo.MongoClient()
+      client = pymongo.MongoClient('mongodb+srv://josjoe1999:qDe18Qg3WTOLGLoh@mycluster.bfyyqll.mongodb.net/)
       db = client['Youtube']
       collection = db['channels']
       result = collection.insert_one(self.channels)
