@@ -181,4 +181,4 @@ class Youtube:
 import streamlit as st 
 ytt=Youtube(st.text_input('channelId'))
 st.write(ytt.channels[ytt.channelName])
-st.button('save to mongodb',oon_click=ytt.save_to_mongo())
+st.button('save to mongodb',on_click=ytt.save_to_mongo())
