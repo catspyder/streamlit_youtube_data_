@@ -100,7 +100,7 @@ class Youtube:
           # Retrieve all comments for the video
         while True:
             # Make the API request
-            response = youtube.commentThreads().list(
+            response = self.youtube.commentThreads().list(
                 part="snippet",
                 videoId=video_id,
                 maxResults=50, 
