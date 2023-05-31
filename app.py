@@ -12,6 +12,8 @@ import googleapiclient.errors
 import json
 import pymongo 
 import pandas as pd
+import pandas as pd
+import mys
 
 class Youtube:
   
@@ -165,6 +167,21 @@ class Youtube:
       db = client['Youtube']
       collection = db['channels']
       result = collection.insert_one(self.channels)
+      collection=db['comments']
+      result = collection.insert_one(self.comments)
+      collection=db['videos']
+      result = collection.insert_one(self.videos)
+      collection=db['playlists']
+      result = collection.insert_one(self.playlists)
+      client.close()
+  def save_to_sql(self):
+     dfChannels=pd.DataFrame.from_dict(ytt.channels[ytt.channelName],orient='index')
+     dfPlaylists=pd.DataFrame.from_dict(ytt.playlists,orient='index')
+     dfComments=pd.DataFrame.from_dict(ytt.playlists,orient='index')
+     dfVideos=pd.DataFrame.from_dict(ytt.videos,orient='index')
+     
+
+
 
   def __init__(self,channelId):
     self.channelId=channelId
