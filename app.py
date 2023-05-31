@@ -23,8 +23,8 @@ class Youtube:
   videos={}
   channelName=''
   # api_key = "AIzaSyCJiX5JoPW95K1-FfWmzN7jPN-JxxyOgeo"
-#   api_key = "AIzaSyABUcsP6P3gSV_cYZSku1t5CSO3qfa3QRg"
-  api_key="AIzaSyAN_z0QMyM7LsdAbSkFs7WJFxye4jK-lA4"
+  api_key = "AIzaSyABUcsP6P3gSV_cYZSku1t5CSO3qfa3QRg"
+#   api_key="AIzaSyAN_z0QMyM7LsdAbSkFs7WJFxye4jK-lA4"
 
 
   
@@ -102,7 +102,7 @@ class Youtube:
           # Retrieve all comments for the video
         while True:
             # Make the API request
-            response = youtube.commentThreads().list(
+            response = self.youtube.commentThreads().list(
                 part="snippet",
                 videoId=video_id,
                 maxResults=50, 
@@ -112,7 +112,7 @@ class Youtube:
             # Collect comments and their information from the API response
             for item in response["items"]:
                 comment_id = item["id"]
-                comment = item["snippet"]["topLevelComment"]["snippet"]
+                comment = item["snippet"]["topLevelComment"]["snippet"]['textDisplay']
                 author = comment["authorDisplayName"]
                 published_at = comment["publishedAt"]
                 comments_dict[comment_id] = {
