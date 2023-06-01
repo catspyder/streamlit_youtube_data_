@@ -12,8 +12,8 @@ import googleapiclient.errors
 import json
 import pymongo 
 import pandas as pd
-import pandas as pd
-import mys
+# import pandas as pd
+# import mys
 
 class Youtube:
   
