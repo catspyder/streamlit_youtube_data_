@@ -107,11 +107,12 @@ class Youtube:
             # Collect comments and their information from the API response
             for item in response["items"]:
                 comment_id = item["id"]
-                comment = item["snippet"]["topLevelComment"]["snippet"]['textDisplay']
+                comment = item["snippet"]["topLevelComment"]["snippet"]
+                commentText=comment['textDisplay']
                 author = comment["authorDisplayName"]
                 published_at = comment["publishedAt"]
                 comments_dict[comment_id] = {
-                    'commentContent':comment,
+                    'commentContent':commentText,
                     'commentId':comment_id,
                   
                     "commentAuthor": author,
