@@ -123,7 +123,7 @@ class Youtube:
             if not next_page_token:
                 break
       except Exception:
-        comment_dict={'no_comments':'disabled'}
+        comments_dict={'no_comments':'disabled'}
           
       videoData['comments']=comments_dict 
       self.comments[video_id]=comments_dict
