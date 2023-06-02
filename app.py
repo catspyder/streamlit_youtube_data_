@@ -155,17 +155,20 @@ class Youtube:
         playlist_data['channelId']=data['snippet']['channelId']
         playlist_data['playlistId']=data['id']
         self.playlists[playlist_data['playlistName']]=playlist_data
+    self.channels['playlists']=self.playlists
   def save_to_mongo(self):
       client = pymongo.MongoClient('mongodb+srv://josjoe1999:qDe18Qg3WTOLGLoh@mycluster.bfyyqll.mongodb.net/')
       db = client['Youtube']
       collection = db['channels']
-      result = collection.insert_one(self.channels)
-      collection=db['comments']
-      result = collection.insert_one(self.comments)
-      collection=db['videos']
-      result = collection.insert_one(self.videos)
-      collection=db['playlists']
-      result = collection.insert_one(self.playlists)
+      filter={'channelName':self.channelName}
+      result = collection.replace_one(filter,self.channels,upsert=True)
+
+      # collection=db['comments']
+      # result = collection.insert_one(self.comments)
+      # collection=db['videos']
+      # result = collection.insert_one(self.videos)
+      # collection=db['playlists']
+      # result = collection.insert_one(self.playlists)
       client.close()
   def save_to_sql(self):
      dfChannels=pd.DataFrame.from_dict(ytt.channels[ytt.channelName],orient='index')
