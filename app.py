@@ -13,7 +13,8 @@ import json
 import pymongo 
 import pandas as pd
 # import pandas as pd
-# import mys
+from mysql import connector
+
 
 class Youtube:
   
@@ -42,7 +43,7 @@ class Youtube:
     channel_data['viewCount']=data['statistics']['viewCount']
     channel_data['playlistId']=data['contentDetails']['relatedPlaylists']['uploads']
     # channel_data['videos']={}
-    self.channels[channel_data['channelName']]=channel_data
+    self.channels=channel_data
 
 
   def get_videos(self):
@@ -132,7 +133,7 @@ class Youtube:
           
       videoData['comments']=comments_dict 
       self.comments[video_id]=comments_dict
-      self.channels[video_id]=videoData
+      self.channels['videos'][video_id]=videoData
       self.videos[video_id]= videoData
     
     
