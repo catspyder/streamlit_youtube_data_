@@ -39,6 +39,8 @@ class Youtube:
 
 
   def get_videos(self):
+    self.channels['videos']={}
+
     video_ids=[]
     next_page_token=None
     while True:
@@ -125,7 +127,6 @@ class Youtube:
           
       videoData['comments']=comments_dict 
       self.comments[video_id]=comments_dict
-      self.channels['videos']={}
       self.channels['videos'][video_id]=videoData
       self.videos[video_id]= videoData
     
