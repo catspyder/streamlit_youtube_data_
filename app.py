@@ -125,6 +125,7 @@ class Youtube:
           
       videoData['comments']=comments_dict 
       self.comments[video_id]=comments_dict
+      self.channels['videos']={}
       self.channels['videos'][video_id]=videoData
       self.videos[video_id]= videoData
     
