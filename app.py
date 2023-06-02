@@ -125,6 +125,7 @@ class Youtube:
           
       videoData['comments']=comments_dict 
       self.comments[video_id]=comments_dict
+      self.channels['videos']={}
       self.channels['videos'][video_id]=videoData
       self.videos[video_id]= videoData
     
@@ -193,5 +194,5 @@ class Youtube:
 
 import streamlit as st 
 ytt=Youtube(st.text_input('channelId'))
-st.write(ytt.channels[ytt.channelName])
+st.write(ytt.channels)
 st.button('save to mongodb',on_click=ytt.save_to_mongo())
