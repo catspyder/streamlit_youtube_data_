@@ -14,6 +14,7 @@ import pymongo
 import pandas as pd
 # import pandas as pd
 from mysql import connector
+from sqlalchemy import create_engine
 
 
 class Youtube:
@@ -84,7 +85,11 @@ class Youtube:
       except KeyError:
         videoData['commentCount']=0
       videoData['favouriteCount']=video['statistics']['favoriteCount'] 
-      videoData['likeCount']=video['statistics']['likeCount']
+      try:
+        videoData['likeCount']=video['statistics']['likeCount']
+      except KeyError:
+         videoData['likeCount']= 0
+         
       videoData['videoName']= video['snippet']['title']
       videoData['videoDescription']= video['snippet']['description']
       try:
@@ -176,11 +181,26 @@ class Youtube:
       result = collection.insert_one(self.playlists)
       client.close()
   def save_to_sql(self):
+    #  from sqlalchemy import create_engine
+     user = 'root'
+     password = 'rskjjnjkk'
+     host = 'localhost'
+     port = 3306
+     database = 'youtube'
+     engine=create_engine(url="mysql+pymysql://{0}:{1}@{2}:{3}/{4}".format(
+                 user, password, host, port, database
+             )
+         )
+      
      dfChannels=pd.DataFrame.from_dict(ytt.channels[ytt.channelName],orient='index')
      dfPlaylists=pd.DataFrame.from_dict(ytt.playlists,orient='index')
      dfComments=pd.DataFrame.from_dict(ytt.playlists,orient='index')
      dfVideos=pd.DataFrame.from_dict(ytt.videos,orient='index')
-     
+     dfVideos.drop(columns=['tags'],inplace=True)
+     dfChannels.to_sql('Channels',engine,if_exists='append')
+     dfVideos.to_sql('Videos',engine,if_exists='append')
+     dfPlaylists.to_sql('playlists',engine,if_exists='append')
+     dfChannels.to_sql('Comments',engine,if_exists='append')
 
 
 
@@ -199,4 +219,6 @@ class Youtube:
 import streamlit as st 
 ytt=Youtube(st.text_input('channelId'))
 st.write(ytt.channels[ytt.channelName])
-st.button('save to mongodb',on_click=ytt.save_to_mongo())
+# st.button('save to mongodb',on_click=ytt.save_to_mongo())
+st.button('save to sql',on_click=ytt.save_to_sql())
+
