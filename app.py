@@ -4,11 +4,12 @@ import googleapiclient.errors
 import json
 import pymongo 
 import pandas as pd
-from SQLAlchemy import create_engine
+# from SQLAlchemy import create_engine
 
 # import pandas as pd
 # from mysql import connector
-con=create_engine(url='postgresql://catspyder:Q5SWng1mEdtp@ep-hidden-brook-76474253.us-east-2.aws.neon.tech/neondb')
+# con=create_engine(url='postgresql://catspyder:Q5SWng1mEdtp@ep-hidden-brook-76474253.us-east-2.aws.neon.tech/neondb')
+con=st.experimental_connection(url='postgresql://catspyder:Q5SWng1mEdtp@ep-hidden-brook-76474253.us-east-2.aws.neon.tech/neondb')
 
 
 class Youtube:
