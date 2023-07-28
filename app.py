@@ -4,8 +4,11 @@ import googleapiclient.errors
 import json
 import pymongo 
 import pandas as pd
+from sqlalchemy import create_engine
+
 # import pandas as pd
 # from mysql import connector
+con=create_engine(url='postgres://catspyder:Q5SWng1mEdtp@ep-hidden-brook-76474253.us-east-2.aws.neon.tech/neondb')
 
 
 class Youtube:
@@ -178,6 +181,10 @@ class Youtube:
      dfPlaylists=pd.DataFrame.from_dict(ytt.playlists,orient='index')
      dfComments=pd.DataFrame.from_dict(ytt.playlists,orient='index')
      dfVideos=pd.DataFrame.from_dict(ytt.videos,orient='index')
+     dfChannels.to_sql('channels',con,if_exists='append')
+     dfPlaylists.to_sql('playlists',con,if_exists='append')
+     dfVideos.to_sql('videos',con,if_exists='append') 
+     dfComments.to_sql('channels',con,if_exists='append')
      
 
 
@@ -198,3 +205,4 @@ import streamlit as st
 ytt=Youtube(st.text_input('channelId'))
 st.write(ytt.channels)
 st.button('save to mongodb',on_click=ytt.save_to_mongo())
+st.button('save to sql',on_click=ytt.save_to_sql())
