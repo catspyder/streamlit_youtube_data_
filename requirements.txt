@@ -3,4 +3,4 @@ pandas
 pymongo
 google-api-python-client
 SQLAlchemy
-
+psycopg2-binary 
