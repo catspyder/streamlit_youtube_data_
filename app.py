@@ -6,7 +6,7 @@ import pymongo
 import pandas as pd
 import streamlit as st
 from sqlalchemy import create_engine
-
+import psycopg2
 # import pandas as pd
 # from mysql import connector
 con=create_engine(url='postgresql://catspyder:Q5SWng1mEdtp@ep-hidden-brook-76474253.us-east-2.aws.neon.tech/neondb')
