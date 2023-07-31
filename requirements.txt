@@ -2,5 +2,6 @@ streamlit
 pandas
 pymongo
 google-api-python-client
+psycopg2
 SQLAlchemy
 
