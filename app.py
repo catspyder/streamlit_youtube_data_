@@ -40,7 +40,7 @@ class Youtube:
     channel_data['viewCount']=data['statistics']['viewCount']
     channel_data['playlistId']=data['contentDetails']['relatedPlaylists']['uploads']
     # channel_data['videos']={}
-    self.channels=channel_data
+    self.channels[self.channelName]=channel_data
 
 
   def get_videos(self):
@@ -209,6 +209,7 @@ st.write(ytt.channels)
 st.button('save to mongodb',on_click=ytt.save_to_mongo())
 st.button('save to sql',on_click=ytt.save_to_sql())
 sql=st.text_input('sql')
+
 with con.execute() as cur:
   result = cur.execute(sql)
   for row in result:
