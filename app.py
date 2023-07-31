@@ -184,7 +184,7 @@ class Youtube:
     pl=channels.pop('playlists')
     
     
-    dfChannels=pd.DataFrame.from_dict(channels)
+    dfChannels=pd.DataFrame(channels,index=[ytt.channelId])
     dfPlaylists=pd.DataFrame.from_dict(self.playlists,orient='index')
     dfComments=pd.DataFrame.from_dict(self.playlists,orient='index')
     dfVideos=pd.DataFrame.from_dict(self.videos,orient='index')
