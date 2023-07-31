@@ -188,6 +188,7 @@ class Youtube:
     dfPlaylists=pd.DataFrame.from_dict(self.playlists,orient='index')
     dfComments=pd.DataFrame.from_dict(self.playlists,orient='index')
     dfVideos=pd.DataFrame.from_dict(self.videos,orient='index')
+    dfVideos.drop(['comments'],axis=1,inplace=True)
     dfChannels.to_sql('channels',con,if_exists='append')
     dfPlaylists.to_sql('playlists',con,if_exists='append')
     dfVideos.to_sql('videos',con,if_exists='append') 
