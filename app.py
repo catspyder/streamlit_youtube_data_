@@ -5,7 +5,7 @@ import json
 import pymongo 
 import pandas as pd
 import streamlit as st
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine,text
 # import psycopg2
 # import pandas as pd
 # from mysql import connector
@@ -184,7 +184,7 @@ class Youtube:
     pl=channels.pop('playlists')
     
     
-    dfChannels=pd.DataFrame.from_dict(channels,orient='index')
+    dfChannels=pd.DataFrame.from_dict(channels)
     dfPlaylists=pd.DataFrame.from_dict(self.playlists,orient='index')
     dfComments=pd.DataFrame.from_dict(self.playlists,orient='index')
     dfVideos=pd.DataFrame.from_dict(self.videos,orient='index')
@@ -219,8 +219,10 @@ sql=st.text_input('sql')
 
 # with con.execute() as cur:
   # result = cur.execute(sql)
-with con.connect() as conn:
-    result = conn.execute(sql)
-for row in result:
-   st.text(row)
+if sql is not None:
+  
+  with con.connect() as conn:
+      result = conn.execute(text(sql))
+  for row in result:
+     st.text(row)
 
