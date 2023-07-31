@@ -192,7 +192,7 @@ class Youtube:
     dfChannels.to_sql('channels',con,if_exists='append')
     dfPlaylists.to_sql('playlists',con,if_exists='append')
     dfVideos.to_sql('videos',con,if_exists='append') 
-    dfComments.to_sql('channels',con,if_exists='append')
+    dfComments.to_sql('comments',con,if_exists='append')
      
 
 
