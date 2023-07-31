@@ -179,14 +179,18 @@ class Youtube:
       # result = collection.insert_one(self.playlists)
       client.close()
   def save_to_sql(self):
-     dfChannels=pd.DataFrame.from_dict(ytt.channels[ytt.channelName],orient='index')
-     dfPlaylists=pd.DataFrame.from_dict(ytt.playlists,orient='index')
-     dfComments=pd.DataFrame.from_dict(ytt.playlists,orient='index')
-     dfVideos=pd.DataFrame.from_dict(ytt.videos,orient='index')
-     dfChannels.to_sql('channels',con,if_exists='append')
-     dfPlaylists.to_sql('playlists',con,if_exists='append')
-     dfVideos.to_sql('videos',con,if_exists='append') 
-     dfComments.to_sql('channels',con,if_exists='append')
+    channels=self.channels.copy()
+    videos=channels.pop('videos')
+    
+    
+    dfChannels=pd.DataFrame.from_dict(channels,orient='index')
+    dfPlaylists=pd.DataFrame.from_dict(self.playlists,orient='index')
+    dfComments=pd.DataFrame.from_dict(self.playlists,orient='index')
+    dfVideos=pd.DataFrame.from_dict(self.videos,orient='index')
+    dfChannels.to_sql('channels',con,if_exists='append')
+    dfPlaylists.to_sql('playlists',con,if_exists='append')
+    dfVideos.to_sql('videos',con,if_exists='append') 
+    dfComments.to_sql('channels',con,if_exists='append')
      
 
 
