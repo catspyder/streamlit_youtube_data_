@@ -181,6 +181,7 @@ class Youtube:
   def save_to_sql(self):
     channels=self.channels.copy()
     videos=channels.pop('videos')
+    pl=channels.pop('playlists')
     
     
     dfChannels=pd.DataFrame.from_dict(channels,orient='index')
