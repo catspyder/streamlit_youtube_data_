@@ -217,8 +217,10 @@ st.button('save to mongodb',on_click=ytt.save_to_mongo())
 st.button('save to sql',on_click=ytt.save_to_sql())
 sql=st.text_input('sql')
 
-with con.execute() as cur:
-  result = cur.execute(sql)
-  for row in result:
-    st.text(row)
+# with con.execute() as cur:
+  # result = cur.execute(sql)
+with con.connect() as conn:
+    result = conn.execute(sql)
+for row in result:
+   st.text(row)
 
