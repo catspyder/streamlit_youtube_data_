@@ -184,7 +184,7 @@ class Youtube:
     pl=channels.pop('playlists')
     
     
-    dfChannels=pd.DataFrame(channels,index=[ytt.channelId])
+    dfChannels=pd.DataFrame(channels,index=[self.channelId])
     dfPlaylists=pd.DataFrame.from_dict(self.playlists,orient='index')
     dfComments=pd.DataFrame.from_dict(self.playlists,orient='index')
     dfVideos=pd.DataFrame.from_dict(self.videos,orient='index')
@@ -212,7 +212,7 @@ class Youtube:
 import streamlit as st 
 ytt=Youtube(st.text_input('channelId'))
 st.write(ytt.channels)
-st.write(ytt.videos)
+# st.write(ytt.videos)
 st.button('save to mongodb',on_click=ytt.save_to_mongo())
 st.button('save to sql',on_click=ytt.save_to_sql())
 sql=st.text_input('sql')
