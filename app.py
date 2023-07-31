@@ -40,7 +40,8 @@ class Youtube:
     channel_data['viewCount']=data['statistics']['viewCount']
     channel_data['playlistId']=data['contentDetails']['relatedPlaylists']['uploads']
     # channel_data['videos']={}
-    self.channels[self.channelName]=channel_data
+    self.channels=channel_data
+    self.channels[self.channelName)=channel_data
 
 
   def get_videos(self):
