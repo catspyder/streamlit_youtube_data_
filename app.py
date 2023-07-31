@@ -5,11 +5,11 @@ import json
 import pymongo 
 import pandas as pd
 import streamlit as st
-# from sqlalchemy import create_engine
+from sqlalchemy import create_engine
 
 # import pandas as pd
 # from mysql import connector
-# con=create_engine(url='postgresql://catspyder:Q5SWng1mEdtp@ep-hidden-brook-76474253.us-east-2.aws.neon.tech/neondb')
+con=create_engine(url='postgresql://catspyder:Q5SWng1mEdtp@ep-hidden-brook-76474253.us-east-2.aws.neon.tech/neondb')
 # con=st.experimental_connection("localdb",type='sql',url='postgresql://catspyder:Q5SWng1mEdtp@ep-hidden-brook-76474253.us-east-2.aws.neon.tech/neondb')
 
 
@@ -183,10 +183,10 @@ class Youtube:
      dfPlaylists=pd.DataFrame.from_dict(ytt.playlists,orient='index')
      dfComments=pd.DataFrame.from_dict(ytt.playlists,orient='index')
      dfVideos=pd.DataFrame.from_dict(ytt.videos,orient='index')
-     # dfChannels.to_sql('channels',con,if_exists='append')
-     # dfPlaylists.to_sql('playlists',con,if_exists='append')
-     # dfVideos.to_sql('videos',con,if_exists='append') 
-     # dfComments.to_sql('channels',con,if_exists='append')
+     dfChannels.to_sql('channels',con,if_exists='append')
+     dfPlaylists.to_sql('playlists',con,if_exists='append')
+     dfVideos.to_sql('videos',con,if_exists='append') 
+     dfComments.to_sql('channels',con,if_exists='append')
      
 
 
